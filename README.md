@@ -6,3 +6,6 @@ Esta dividido en 3 carpetas principales
 > Donde tenemos los componentes principales a usar
 3. Services
 > Donde tenemos la logica que realiza las peticiones http
+
+# Para ejecutar el proyecto sencillamente acceda a esta url:
+https://twynzen.github.io/PruebaNewshore/
