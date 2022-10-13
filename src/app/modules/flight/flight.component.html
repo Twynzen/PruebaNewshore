@@ -1,0 +1,14 @@
+<form [formGroup]="journeyQuestions">
+
+    <div>
+        <label for="origin">Origin</label>
+        <input type="text" maxlength="3" formControlName="origin" oninput="this.value = this.value.toUpperCase()">
+    </div>
+
+    <div>
+        <label for="destination">Destination</label>
+        <input type="text" maxlength="3" formControlName="destination" oninput="this.value = this.value.toUpperCase()">
+    </div>
+    <button (click)="sendQuestion();">CONSULT</button>
+
+</form>
