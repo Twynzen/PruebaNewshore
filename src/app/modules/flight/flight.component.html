@@ -1,4 +1,18 @@
 <form [formGroup]="journeyQuestions">
+    <div>
+        <h3 for="TypeRoute">Tipo de ruta</h3>
+
+        <input type="radio" name="typeRoute" formControlName="typeRoute" value="0" id="">
+        <label for="TypeRoute">Ruta simple</label>
+
+        <br>
+        <input type="radio" name="typeRoute" formControlName="typeRoute" value="1" id="">
+        <label for="TypeRoute">Rutas multiples</label>
+
+        <br>
+        <!-- <input type="radio" name="typeRoute" formControlName="typeRoute" value="2" id="" />
+        <label for="TypeRoute">Rutas multiples y retorno</label> -->
+    </div>
 
     <div>
         <label for="origin">Origin</label>
@@ -9,6 +23,34 @@
         <label for="destination">Destination</label>
         <input type="text" maxlength="3" formControlName="destination" oninput="this.value = this.value.toUpperCase()">
     </div>
-    <button (click)="sendQuestion();">CONSULT</button>
+    <button (click)="sendQuestion();" [disabled]="!journeyQuestions.valid">CONSULT</button>
 
 </form>
+
+<div *ngIf="this.matched && !this.scales">
+    <h1>Estos son los datos del viaje</h1>
+    <p>Origen: {{match[0].departureStation}}</p>
+    <p>Destino: {{match[0].arrivalStation}}</p>
+    <p>Transportista de vuelo: {{match[0].flightCarrier}}</p>
+    <p>Número de vuelo: {{match[0].flightNumber}}</p>
+    <p>Precio: $ {{match[0].price}} USD</p>
+</div>
+<div *ngIf="this.scales">
+    <h1>Estos son los datos del viaje, Tiene escalas</h1>
+    <p>Origen: {{this.journeyQuestions.value.origin}}</p>
+    <p>Destino: {{this.journeyQuestions.value.destination}}</p>
+    <div *ngFor="let scale of this.scaleMatch; index as i">
+        <h3>Escala #{{i+1}}</h3>
+        <p>Escala desde: {{scale.departureStation}}</p>
+        <p>Escala hasta: {{scale.arrivalStation}}</p>
+        <p>Transportista de vuelo: {{scale.flightCarrier}}</p>
+        <p>Número de vuelo: {{scale.flightNumber}}</p>
+    </div>
+    <h2>Precio total: $ {{price}} USD</h2>
+
+</div>
+
+<div *ngIf="!this.matched && !this.firstConsult">
+    <h1>Su consulta no puede ser procesada.</h1>
+
+</div>
